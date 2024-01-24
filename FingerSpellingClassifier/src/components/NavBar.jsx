@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../static/index.css";
-import About from "../routes/About";
-import Challenges from "../routes/Challenges";
+import "../../static/index.css";
 
 const NavBar = () => {
   return (
     <>
       <div className="navBar">
         <h3 className="navHeader">
-          <span style={{ fontSize: "2.5rem" }}>✌</span> FINGER SPELLING
-          CLASSIFIER
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <span style={{ fontSize: "2.5rem" }}>✌</span>{" "}
+          </Link>
+          FINGER SPELLING CLASSIFIER
         </h3>
         <ul className="navList">
           <li>
