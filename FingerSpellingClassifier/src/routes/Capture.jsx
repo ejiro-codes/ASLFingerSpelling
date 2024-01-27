@@ -7,7 +7,13 @@ const Capture = () => {
   const [imageTaken, setImageTaken] = useState(false);
   const image = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
+  const [predictedImg, setPredictedImage] = useState("");
 
+  let predict = "";
+  let predictedSrcPath =
+    "../../ASL_Images/" +
+    JSON.stringify({ predictedImg }).slice(17, -2) +
+    ".jpg";
   const videoConstraints = {
     width: 500,
     height: 400,
@@ -21,9 +27,6 @@ const Capture = () => {
   }, [image, setImgSrc]);
 
   const prediction = async (imageSrc) => {
-    //console.log(imageSrc);
-    //var file = new File(["a1.jpg"], "FingerSpellingClassifier/public/a1.jpg");
-
     try {
       const response = await fetch("http://127.0.0.1:8080", {
         method: "POST",
@@ -36,7 +39,7 @@ const Capture = () => {
         }),
       })
         .then((r) => r.json())
-        .then((data) => console.log(data));
+        .then((data) => setPredictedImage(data));
     } catch (e) {
       console.log(e);
     }
@@ -97,9 +100,9 @@ const Capture = () => {
                 <div className="demarc"></div>
               </li>
               <li>
-                <h3>Prediction: </h3>
+                <h3 className="sampleName">Prediction: {predictedImg}</h3>
                 <div className="webcamCapture">
-                  <img src="../../ex1.png" alt="" height={400} width={500} />
+                  <img src={predictedSrcPath} alt="" height={400} width={500} />
                 </div>
               </li>
             </ul>
